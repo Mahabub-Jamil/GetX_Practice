@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_practice/counter_controller.dart';
 import 'package:getx_practice/home_screen.dart';
+import 'package:getx_practice/profile_screen.dart';
+import 'package:getx_practice/settings_screen.dart';
 
 void main() {
   runApp(const CounterApp());
@@ -14,8 +16,12 @@ class CounterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
       initialBinding: ControllerBinder(),
+      routes: {
+        HomeScreen.name: (context) => const HomeScreen(),
+        ProfileScreen.name: (context) => const ProfileScreen(),
+        SettingsScreen.name: (context) => const SettingsScreen(),
+      },
     );
   }
 }
