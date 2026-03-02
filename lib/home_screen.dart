@@ -40,6 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Text("Profile"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Get.showSnackbar(
+                  GetSnackBar(
+                    title: "Title",
+                    message: "This is message",
+                    duration: Duration(seconds: 3),
+                  ),
+                );
+              },
+              child: Text("Show SnackBar"),
+            ),
           ],
         ),
       ),

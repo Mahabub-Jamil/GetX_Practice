@@ -17,6 +17,7 @@ class CounterApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: ControllerBinder(),
+      initialRoute: '/',
       routes: {
         HomeScreen.name: (context) => const HomeScreen(),
         ProfileScreen.name: (context) => const ProfileScreen(),
