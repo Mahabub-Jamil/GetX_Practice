@@ -6,6 +6,10 @@ import 'package:getx_practice/profile_screen.dart';
 import 'package:getx_practice/settings_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const CounterApp());
 }
 
