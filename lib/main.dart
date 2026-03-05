@@ -1,15 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_practice/counter_controller.dart';
+import 'package:getx_practice/firebase_options.dart';
 import 'package:getx_practice/home_screen.dart';
 import 'package:getx_practice/profile_screen.dart';
 import 'package:getx_practice/settings_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const CounterApp());
 }
 
