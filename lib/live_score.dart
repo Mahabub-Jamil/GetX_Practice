@@ -10,55 +10,78 @@ class LiveScoreHome extends StatefulWidget {
 }
 
 class _LiveScoreHomeState extends State<LiveScoreHome> {
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  List<CricketMatch> _matchList = [];
-  bool _inProgress = false;
-  @override
-  void initState() {
-    super.initState();
-    _getData();
-  }
+  final List<CricketMatch> _matchList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Live Score")),
-      body: Visibility(
-        visible: !_inProgress,
-        replacement: Center(child: CircularProgressIndicator()),
-        child: ListView.builder(
-          itemCount: _matchList.length,
-          itemBuilder: (context, index) {
-            CricketMatch cricketMatch = _matchList[index];
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: _indicatorColor(cricketMatch.isMatchRunning),
-                radius: 10,
-              ),
-              title: Text(cricketMatch.matchId),
-              subtitle: Text(
-                '${cricketMatch.teamOne}:${cricketMatch.teamOneScore}-${cricketMatch.teamOneWicket} \n${cricketMatch.teamTwo}: ${cricketMatch.teamTwoScore}-${cricketMatch.teamTwoWicket}',
-              ),
-              trailing: Text('Winner:${cricketMatch.winnerTeam}'),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('cricket').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+          if (snapshot.hasData) {
+            _extractData(snapshot.data);
+            return ListView.builder(
+              itemCount: _matchList.length,
+              itemBuilder: (context, index) {
+                CricketMatch cricketMatch = _matchList[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: _indicatorColor(
+                      cricketMatch.isMatchRunning,
+                    ),
+                    radius: 10,
+                  ),
+                  title: Text(cricketMatch.matchId),
+                  subtitle: Text(
+                    '${cricketMatch.teamOne}:${cricketMatch.teamOneScore}-${cricketMatch.teamOneWicket} \n${cricketMatch.teamTwo}: ${cricketMatch.teamTwoScore}-${cricketMatch.teamTwoWicket}',
+                  ),
+                  trailing: Text(
+                    'Winner:${cricketMatch.winnerTeam == '' ? 'Pending' : cricketMatch.winnerTeam}',
+                  ),
+                );
+              },
             );
-          },
-        ),
+          }
+          return SizedBox();
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          CricketMatch cricketMatch = CricketMatch(
+            matchId: 'indvspak',
+            teamOne: 'Pakistan',
+            teamTwo: 'India',
+            teamOneScore: 256,
+            teamTwoScore: 203,
+            teamOneWicket: 6,
+            teamTwoWicket: 9,
+            winnerTeam: '',
+            isMatchRunning: true,
+          );
+          FirebaseFirestore.instance
+              .collection('cricket')
+              .doc('pakvsind')
+              .set(cricketMatch.toJson());
+        },
       ),
     );
   }
 
-  Future<void> _getData() async {
-    _inProgress = true;
-    setState(() {});
+  void _extractData(QuerySnapshot<Map<String, dynamic>>? snapshot) {
     _matchList.clear();
-    final snapShot = await _firebaseFirestore.collection('cricket').get();
-    for (DocumentSnapshot doc in snapShot.docs) {
+    for (DocumentSnapshot doc in snapshot?.docs ?? []) {
       _matchList.add(
         CricketMatch.fromJson(doc.id, doc.data() as Map<String, dynamic>),
       );
     }
-    _inProgress = false;
-    setState(() {});
   }
 
   Color _indicatorColor(bool isMatchRunning) {

@@ -35,4 +35,17 @@ class CricketMatch {
       isMatchRunning: json['isMatchRunning'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'teamOne': teamOne,
+      'teamOneScore': teamOneScore,
+      'teamOneWicket': teamOneWicket,
+      'teamTwo': teamTwo,
+      'teamTwoWicket': teamTwoWicket,
+      'teamTwoScore': teamTwoScore,
+      'winnerTeam': winnerTeam,
+      'isMatchRunning': isMatchRunning,
+    };
+  }
 }
