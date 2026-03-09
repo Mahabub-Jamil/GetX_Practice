@@ -12,6 +12,10 @@ class FirebaseNotificationManager {
     return token;
   }
 
+  static Future<void> onRefreshToken() async {
+    FirebaseMessaging.instance.onTokenRefresh.listen((String? token) {});
+  }
+
   static Future<void> initialize() async {
     await FirebaseMessaging.instance.requestPermission();
 
