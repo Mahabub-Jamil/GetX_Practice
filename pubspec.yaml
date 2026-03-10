@@ -49,6 +49,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,9 +62,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -90,3 +90,82 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_native_splash:
+  # This package generates native code to customize Flutter's default white native splash screen
+  # with background color and splash image.
+  # Customize the parameters below, and run the following command in the terminal:
+  # flutter pub run flutter_native_splash:create
+  # To restore Flutter's default white splash screen, run the following command in the terminal:
+  # flutter pub run flutter_native_splash:remove
+
+  # color or background_image is the only required parameter.  Use color to set the background
+  # of your splash screen to a solid color.  Use background_image to set the background of your
+  # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
+  # size of the app. Only one parameter can be used, color and background_image cannot both be set.
+  color: "#ffffff"
+
+  # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
+  # the leading # character.
+
+  # The image parameter allows you to specify an image used in the splash screen.  It must be a
+  # png file and should be sized for 4x pixel density.
+  #image: assets/sample_logo.png
+
+  # The branding property allows you to specify an image used as branding in the splash screen.
+  # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12+
+  # the image will be displayed over the Android 12+ splash screen.
+  # If the image is larger than the size requirements, it will be cropped.
+
+  #branding: assets/dart.png
+
+  # To position the branding image at the bottom of the screen you can use bottom, bottomRight,
+  # and bottomLeft. The default values is bottom if not specified or specified something else.
+  #branding_mode: bottom
+
+  # To hide the notification bar, use the fullscreen parameter.  Has no effect in web since web
+  # has no notification bar.  Defaults to false.
+  # NOTE: Unlike Android, iOS will not automatically show the notification bar when the app loads.
+  #       To show the iOS notification bar, you must provide a launch image for iOS
+  #       https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/launch-screen
+  #fullscreen: true
+
+  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+  # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+  # do not remove any spaces:
+  #info_plist_files:
+  #  - 'ios/Runner/Info.plist'
+
+  # To enable support for Android 12+ splash screens, use the android_12 parameter.
+  # android_12: null
+
+  # To enable support for Android 12+ splash screens, use the android_12 parameter.
+  # android_12:
+  #   - image: assets/android12splash.png
+  #   - icon_background_color: "#ffffff"
+
+  # App icon background color.
+  #icon_background_color: "#ffffff"
+
+  # The image_dark, color_dark, background_image_dark, and branding_dark are parameters that set the image and color of the splash screen for dark mode. If they are not specified, the app will use the parameters from above. If the image_dark parameter is specified, color_dark or background_image_dark must be specified to color the background of the dark mode splash screen.
+  #image_dark: assets/splash-invert.png
+  #color_dark: "#121212"
+  #background_image_dark: "assets/dark-background.png"
+  #branding_dark: assets/dart_dark.png
+
+  # The android, ios and web parameters can be used to disable generating a splash screen on a given platform.
+  #android: false
+  #ios: false
+  #web: false
+
+  # Platform specific images can be specified with the following parameters, which will override
+  # the respective parameter.  You may not be able to delete these images from your project
+  # as they may also be used for other purposes.
+  #android_gravity: center
+  #ios_content_mode: center
+  #web_image_mode: center
+
+  # To hide the branding image on certain platforms, use the following parameters:
+  #android_branding: false
+  #ios_branding: false
+  #web_branding: false
