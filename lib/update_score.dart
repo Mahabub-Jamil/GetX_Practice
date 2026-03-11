@@ -11,8 +11,14 @@ class _UpdateScoreState extends State<UpdateScore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Update Score"), actions: [
-
+      appBar: AppBar(title: Text("Update Score")),
+      body: Column(
+        children: [
+          SizedBox(height: 24),
+          Text(
+            "Update the score",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight(2)),
+          ),
         ],
       ),
     );
