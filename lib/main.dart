@@ -20,6 +20,7 @@ class LiveScoreApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: LiveScoreHome(),
+      theme: ThemeData(textTheme: TextTheme()),
     );
   }
 }

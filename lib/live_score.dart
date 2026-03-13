@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_practice/cricket_match.dart';
+import 'package:getx_practice/nexus_mock_screen.dart';
 
 class LiveScoreHome extends StatefulWidget {
   const LiveScoreHome({super.key});
@@ -70,6 +71,10 @@ class _LiveScoreHomeState extends State<LiveScoreHome> {
               .collection('cricket')
               .doc('pakvsind')
               .set(cricketMatch.toJson());
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NexusMockScreen()),
+          );
         },
       ),
     );
