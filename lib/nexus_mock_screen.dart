@@ -13,7 +13,9 @@ class _NexusMockScreenState extends State<NexusMockScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NexusAppBar(),
-      body: Column(children: [Text("start design")]),
+      body: Column(
+        children: [Text("start design"), Text("This is Balance Card")],
+      ),
     );
   }
 }
